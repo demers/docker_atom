@@ -1,2 +1,5 @@
-# docker_atom
-Atom accessible par SSH avec les meilleurs plugins
+# Editeur Atom s'exécutant dans un conteneur via SSH.
+
+Inspiration:
+https://scotch.io/bar-talk/best-of-atom-features-plugins-acting-like-sublime-text
+
