@@ -23,16 +23,23 @@ RUN adduser --quiet --disabled-password --shell /bin/bash --home /home/${USERNAM
 # Set password for the Ubuntu user (you may want to alter this).
 RUN echo "$USERNAME:$PASSWORD" | chpasswd
 
-# Installation de Atom
-#RUN cd /tmp \
-    #&& wget https://atom.io/download/deb -O atom.deb \
-    #&& dpkg -i atom.deb
-
+# Installation X11.
 RUN apt install -y xauth libxss1
 
+# Installation de Atom
 RUN add-apt-repository -y ppa:webupd8team/atom \
     && apt update \
     && apt install -y atom
+
+# Installation des plugins de
+# https://scotch.io/bar-talk/best-of-atom-features-plugins-acting-like-sublime-text
+# sauf pour vim-mode qui est remplacé par vim-mode-plus
+ADD plugins.bash ${WORKDIRECTORY}
+RUN chmod u+x ${WORKDIRECTORY}/plugins.bash
+RUN chown $USERNAME ${WORKDIRECTORY}/plugins.bash
+RUN echo "if [ -f plugins.bash ]; then" >> ${WORKDIRECTORY}/.bash_profile
+RUN echo "./plugins.bash" >> ${WORKDIRECTORY}/.bash_profile
+RUN echo "fi" >> ${WORKDIRECTORY}/.bash_profile
 
 #RUN apm install atom-autocomplete-php \
     #&& apm install auto-update-packages \
@@ -69,14 +76,11 @@ RUN add-apt-repository -y ppa:webupd8team/atom \
     #&& apm install vim-mode-plus \
     #&& apm install wakati
 
-# Prochaine étape:
-# https://scotch.io/bar-talk/best-of-atom-features-plugins-acting-like-sublime-text
-
 WORKDIR ${WORKDIRECTORY}
 
 RUN cd ${WORKDIRECTORY} \
     && mkdir work \
-    && chown -R $USERNAME:$PASSWORD work
+    && chown -R $USERNAME work
 
 # Standard SSH port
 EXPOSE 22
