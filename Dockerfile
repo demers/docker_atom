@@ -17,6 +17,7 @@ RUN apt-get install -y vim-nox curl git software-properties-common
 RUN apt install -y openssh-server
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd
 RUN mkdir -p /var/run/sshd
+RUN /usr/bin/ssh-keygen -A
 
 # Add user to the image
 RUN adduser --quiet --disabled-password --shell /bin/bash --home /home/${USERNAME} --gecos "User" ${USERNAME}
