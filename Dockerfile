@@ -27,6 +27,9 @@ RUN echo "$USERNAME:$PASSWORD" | chpasswd
 # Installation X11.
 RUN apt install -y xauth libxss1
 
+# Installation PHP
+RUN apt install -y php
+
 # Installation de Atom
 RUN add-apt-repository -y ppa:webupd8team/atom \
     && apt update \
@@ -41,6 +44,13 @@ RUN chown $USERNAME ${WORKDIRECTORY}/plugins.bash
 RUN echo "if [ -f plugins.bash ]; then" >> ${WORKDIRECTORY}/.bash_profile
 RUN echo "./plugins.bash" >> ${WORKDIRECTORY}/.bash_profile
 RUN echo "fi" >> ${WORKDIRECTORY}/.bash_profile
+
+# Installation Python 3
+RUN apt install -y git python3 python3-pip
+# Mise à jour PIP
+RUN pip3 install --upgrade pip
+RUN pip3 install flake8
+RUN pip3 install flake8-docstrings
 
 WORKDIR ${WORKDIRECTORY}
 

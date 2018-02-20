@@ -1,5 +1,5 @@
 #!/bin/bash
-apm install atom-autocomplete-php
+apm install autocomplete-php
 #Génère des erreurs sous Linux.
 #RUN apm install auto-update-packages
 apm install autocomplete-modules
@@ -26,7 +26,8 @@ apm install opened-files
 apm install pigments
 apm install project-manager
 apm install project-quick-open
-apm install react
+# Incompatible à language-babel
+#apm install react
 apm install simple-drag-drop-text
 apm install sort-lines
 apm install tabs-to-spaces
@@ -36,5 +37,13 @@ apm install vim-mode-plus
 #Ne semble plus exister.
 #RUN apm install waka
 
-rm -f plugins.bash
+# Pour le développement Python
+# Inspiré de http://www.marinamele.com/install-and-configure-atom-editor-for-python
+# Il faut que flake8 soit installé comme suit:
+#   pip install flake8
+#   pip install flake8-docstrings
+apm install linter-flake8
+
+sleep 1
+mv -f plugins.bash plugins_atom.bash
 
