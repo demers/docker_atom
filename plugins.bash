@@ -33,7 +33,10 @@ apm install sort-lines
 apm install tabs-to-spaces
 apm install tree-view-autoresize
 apm install tree-view-git-status
-apm install vim-mode-plus
+
+#Seulement pour les connaisseurs de VIM
+#apm install vim-mode-plus
+
 #Ne semble plus exister.
 #RUN apm install waka
 
