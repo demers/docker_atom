@@ -59,7 +59,7 @@ RUN pip3 install flake8-docstrings
 WORKDIR ${WORKDIRECTORY}
 
 RUN cd ${WORKDIRECTORY} \
-    && mkdir work \
+    && mkdir -p work \
     && chown -R $USERNAME work
 
 # Standard SSH port
