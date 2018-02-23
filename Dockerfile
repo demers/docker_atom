@@ -2,6 +2,8 @@ FROM ubuntu:17.10
 
 MAINTAINER FND <fndemers@gmail.com>
 
+ENV PROJECTNAME=ATOM
+
 # Access SSH login
 ENV USERNAME=ubuntu
 ENV PASSWORD=ubuntu
@@ -34,6 +36,8 @@ RUN apt install -y php
 RUN add-apt-repository -y ppa:webupd8team/atom \
     && apt update \
     && apt install -y atom
+
+RUN echo "export PS1=\"\\e[0;31m $PROJECTNAME\\e[m \$PS1\"" >> ${WORKDIRECTORY}/.bash_profile
 
 # Installation des plugins de
 # https://scotch.io/bar-talk/best-of-atom-features-plugins-acting-like-sublime-text
