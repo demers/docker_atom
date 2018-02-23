@@ -3,6 +3,7 @@ version: '2.1'
 services:
   atom:
     build: .
+    image: atom
     container_name: atom
     volumes:
       - "data_work:/home/ubuntu/work"
