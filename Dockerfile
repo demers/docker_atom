@@ -50,13 +50,21 @@ RUN echo "./plugins.bash" >> ${WORKDIRECTORY}/.bash_profile
 RUN echo "fi" >> ${WORKDIRECTORY}/.bash_profile
 
 # Installation Python 3
-RUN apt install -y git python3 python3-pip
+RUN apt install -y git python3 python3-pip python3-mock python3-tk
 # Mise à jour PIP
 RUN pip3 install --upgrade pip
 RUN pip3 install flake8
 RUN pip3 install flake8-docstrings
+RUN pip3 install pylint
 
 WORKDIR ${WORKDIRECTORY}
+
+RUN echo "export PYTHONPATH=." >> ${WORKDIRECTORY}/.bash_profile
+
+RUN git clone https://github.com/pyenv/pyenv.git ${WORKDIRECTORY}/.pyenv
+RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ${WORKDIRECTORY}/.bash_profile
+RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ${WORKDIRECTORY}/.bash_profile
+RUN echo 'eval "$(pyenv init -)"' >> ${WORKDIRECTORY}/.bash_profile
 
 RUN cd ${WORKDIRECTORY} \
     && mkdir -p work \
