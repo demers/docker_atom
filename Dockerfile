@@ -62,6 +62,7 @@ RUN pip3 install --upgrade pip
 RUN pip3 install flake8
 RUN pip3 install flake8-docstrings
 RUN pip3 install pylint
+ENV PYTHONIOENCODING=utf-8
 
 WORKDIR ${WORKDIRECTORY}
 
