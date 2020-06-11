@@ -1,5 +1,6 @@
 
 # Installation PHP
+RUN apt-get update
 RUN apt install -y php
 
 # Installation de Atom
@@ -12,9 +13,10 @@ RUN add-apt-repository -y ppa:webupd8team/atom \
 # sauf pour vim-mode qui est remplacé par vim-mode-plus
 ADD plugins.bash ${WORKDIRECTORY}
 RUN chmod u+x ${WORKDIRECTORY}/plugins.bash
-RUN chown $USERNAME ${WORKDIRECTORY}/plugins.bash
+RUN chown $USERNAME:$USERNAME ${WORKDIRECTORY}/plugins.bash
 RUN echo "if [ -f plugins.bash ]; then" >> ${WORKDIRECTORY}/.bash_profile
 RUN echo "./plugins.bash" >> ${WORKDIRECTORY}/.bash_profile
+RUN echo "rm -f ./plugins.bash" >> ${WORKDIRECTORY}/.bash_profile
 RUN echo "fi" >> ${WORKDIRECTORY}/.bash_profile
 
 # Installation Python 3
@@ -34,4 +36,5 @@ RUN git clone https://github.com/pyenv/pyenv.git ${WORKDIRECTORY}/.pyenv
 RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ${WORKDIRECTORY}/.bash_profile
 RUN echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ${WORKDIRECTORY}/.bash_profile
 RUN echo 'eval "$(pyenv init -)"' >> ${WORKDIRECTORY}/.bash_profile
+RUN chown $USERNAME:$USERNAME ${WORKDIRECTORY}/.pyenv
 
