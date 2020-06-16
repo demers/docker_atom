@@ -7,7 +7,7 @@ popd
 cp -f /tmp/docker-ubuntu/Dockerfile .
 cp -f /tmp/docker-ubuntu/extra.vimrc .
 cp -f /tmp/docker-ubuntu/after.vimrc .
-rm -f -r /tmp/docker-ubuntu/*
+rm -f -r /tmp/docker-ubuntu
 
 sed -i 's/PROJECTNAME=UBUNTU/PROJECTNAME=ATOM/g' Dockerfile
 
